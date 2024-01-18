@@ -33,3 +33,9 @@ rl.on('line', (input) => {
     writeData(input);
   }
 });
+
+// Handle Ctrl+C (SIGINT)
+rl.on('SIGINT', () => {
+  console.log('Program completed');
+  rl.close();
+});
