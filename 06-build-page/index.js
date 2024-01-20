@@ -11,12 +11,12 @@ const srcCssFolderPath = path.join(__dirname, 'styles');
 const srcTemplatePath = path.join(__dirname, 'template.html');
 const componentsFolderPath = path.join(__dirname, 'components');
 
-// Create folder
+// Create `project-dist` folder
 fs.mkdir(destFolderPath, { recursive: true }, (err) => {
   if (err) console.error(err);
 });
 
-// Copy assets folder
+// Copy `assets` folder
 fs.cp(srcAssetsPath, destAssetsPath, { recursive: true }, (err) => {
   if (err) {
     console.error(err);
@@ -27,8 +27,7 @@ fs.cp(srcAssetsPath, destAssetsPath, { recursive: true }, (err) => {
 const input = fs.createReadStream(srcTemplatePath, 'utf-8');
 const output = fs.createWriteStream(destHtmlPath);
 input.pipe(output).on('finish', () => {
-  // ! HTML
-  // Чтение и обработка index.html начинаются только после завершения копирования
+  // Read index.html after copying is finished
   fs.readFile(destHtmlPath, 'utf-8', (err, htmlContent) => {
     if (err) {
       console.error(err);
