@@ -5,11 +5,16 @@ const folderName = 'files';
 const srcFolderPath = path.join(__dirname, folderName);
 const destFolderPath = path.join(__dirname, `${folderName}-copy`);
 
-fs.mkdir(destFolderPath, { recursive: true }, (err) => {
+fs.rm(destFolderPath, { recursive: true, force: true }, (err) => {
   if (err) {
     console.error(err);
   }
-  copyFiles();
+  fs.mkdir(destFolderPath, { recursive: true }, (err) => {
+    if (err) {
+      console.error(err);
+    }
+    copyFiles();
+  });
 });
 
 function copyFiles() {
